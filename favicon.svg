@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+  <!-- Arka plan -->
+  <rect width="100%" height="100%" rx="14" ry="14" fill="#c62828"/>
+
+  <!-- Kar efekti -->
+  <circle cx="12" cy="14" r="2" fill="white"/>
+  <circle cx="48" cy="10" r="2" fill="white"/>
+  <circle cx="32" cy="50" r="2" fill="white"/>
+
+  <!-- 26 yazısı -->
+  <text x="50%" y="56%"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-size="34"
+        font-family="Arial, sans-serif"
+        font-weight="bold"
+        fill="white">
+    26
+  </text>
+
+  <!-- Minik yılbaşı ağacı -->
+  <text x="50%" y="18"
+        text-anchor="middle"
+        font-size="14">
+    🎄
+  </text>
+</svg>
