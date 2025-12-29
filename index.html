@@ -284,10 +284,12 @@ body{
 <div class="subtitle">💖 I LOVE YOU 💖</div>
 
 <a class="music-btn"
-   href="https://youtu.be/cSoI27m1b8g?si=fYBjBSmui4wAiHpL&t=28"
-   target="_blank" rel="noopener noreferrer">
+   id="musicBtn"
+   href="javascript:void(0)">
 🎶 MÜZİĞİ BAŞLAT
 </a>
+
+<audio id="music" src="jingle.mp3"></audio>
 
 <a class="love-btn"
    href="https://youtu.be/VsFivDV-SKU?si=vGae0ALXyj9VKMRd&t=69"
@@ -352,7 +354,22 @@ addBulbs("top", 35);
 addBulbs("left", 22);
 addBulbs("right", 22);
 
+/*ŞARKI*/
+const music = document.getElementById("music");
+const btn = document.getElementById("musicBtn");
 
+btn.addEventListener("click", (e) => {
+  e.preventDefault(); // 🔴 BU SATIR ÖNEMLİ
+
+  if (music.paused) {
+    music.play();
+    btn.textContent = "⏸ MÜZİĞİ DURDUR";
+  } else {
+    music.pause();
+    btn.textContent = "🎶 MÜZİĞİ BAŞLAT";
+  }
+});    
+ 
 /* KAR */
 setInterval(()=>{
     const s=document.createElement("div");
@@ -458,5 +475,6 @@ document.addEventListener("click",(e)=>{
 
 </body>
 </html>
+
 
 
