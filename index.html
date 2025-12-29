@@ -44,6 +44,53 @@ body{
     z-index:9999;
 }
 
+/*SLİDER*/
+#volumeContainer {
+    position: fixed;
+    top: 70px; /* butonun hemen altına */
+    right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* emoji ile slider arası boşluk */
+    z-index: 9999;
+}
+
+#volumeIcon {
+    font-size: 20px; /* hoparlör boyutu */
+}
+
+#volumeSlider {
+    width: 150px;
+    -webkit-appearance: none;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Slider topu (thumb) pembe */
+#volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #e91e63;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+#volumeSlider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #e91e63;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+
+
 .love-btn{
     position:fixed;
     bottom:25px;
@@ -289,7 +336,15 @@ body{
 🎶 MÜZİĞİ BAŞLAT
 </a>
 
+<!-- Slider ve hoparlör emojisi -->
+<div id="volumeContainer">
+  <span id="volumeIcon">🔊</span>
+  <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+</div>
+
+
 <audio id="music" src="jingle.mp3"></audio>
+
 
 <a class="love-btn"
    href="https://youtu.be/VsFivDV-SKU?si=vGae0ALXyj9VKMRd&t=69"
@@ -354,12 +409,15 @@ addBulbs("top", 35);
 addBulbs("left", 22);
 addBulbs("right", 22);
 
+
 /*ŞARKI*/
 const music = document.getElementById("music");
 const btn = document.getElementById("musicBtn");
+const slider = document.getElementById("volumeSlider");
 
+// Müzik başlat/durdur
 btn.addEventListener("click", (e) => {
-  e.preventDefault(); // 🔴 BU SATIR ÖNEMLİ
+  e.preventDefault();
 
   if (music.paused) {
     music.play();
@@ -368,8 +426,15 @@ btn.addEventListener("click", (e) => {
     music.pause();
     btn.textContent = "🎶 MÜZİĞİ BAŞLAT";
   }
-});    
- 
+});
+
+// Slider ile ses kontrolü
+slider.addEventListener("input", (e) => {
+  music.volume = e.target.value;
+});
+
+
+
 /* KAR */
 setInterval(()=>{
     const s=document.createElement("div");
@@ -475,6 +540,3 @@ document.addEventListener("click",(e)=>{
 
 </body>
 </html>
-
-
-
