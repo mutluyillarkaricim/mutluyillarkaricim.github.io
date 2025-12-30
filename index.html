@@ -14,6 +14,11 @@ body{
     font-family:'Comic Sans MS', cursive;
 }
 
+body {
+    cursor: url('bee.png'), auto;
+}
+
+
 /* BAŞLIK */
 .title{
     text-align:center;
@@ -117,6 +122,21 @@ body{
 }
 .left{left:10px}
 .right{right:10px}
+
+
+
+/* Popup resim */
+#popupImage{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    display:none;
+    max-width:80%;
+    max-height:80%;
+    z-index:9999;
+}
+
 
 
 /* Ampuller */
@@ -302,6 +322,28 @@ body{
     }
 }
 
+
+
+/*ARILAR*/
+.beehive {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    font-size: 50px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.bee {
+    position: absolute;
+    font-size: 20px;
+    pointer-events: none;
+    transition: transform 7s linear, opacity 7s linear;
+}
+
+
+
+
 /* MESAJ */
 .message{
     position:fixed;
@@ -330,6 +372,14 @@ body{
 <div class="title">🎄✨ Mutlu Yıllar Karıcım ✨🎄</div>
 <div class="subtitle">💖 I LOVE YOU 💖</div>
 
+
+<!-- Ortada çıkacak resim -->
+<img id="popupImage" src="grinch.png" alt="Popup" />
+
+<!-- Ses dosyası -->
+<audio id="popupSound" src="haha.mp3"></audio>
+
+
 <a class="music-btn"
    id="musicBtn"
    href="javascript:void(0)">
@@ -355,6 +405,11 @@ body{
 <div class="top-lights" id="top"></div>
 <div class="side left" id="left"></div>
 <div class="side right" id="right"></div>
+
+
+<div class="beehive" id="beehive">🍯</div>
+
+
 
 <div class="tree left">🎄</div>
 <div class="tree right">🎄</div>
@@ -389,6 +444,63 @@ setInterval(() => {
     }, 800);
 
 }, 70); // yıldız çıkma sıklığı
+
+
+
+/*ARILAR*/
+const beehive = document.getElementById('beehive');
+
+beehive.addEventListener('click', () => {
+    const beesCount = 40;
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    for (let i = 0; i < beesCount; i++) {
+        const bee = document.createElement('div');
+        bee.className = 'bee';
+        bee.textContent = '🐝';
+        bee.style.left = `${beehive.offsetLeft + 15}px`;
+        bee.style.top = `${beehive.offsetTop + 15}px`;
+        document.body.appendChild(bee);
+
+        // Kovandan merkeze temel yön + rastgele sapma
+        const deltaX = (centerX - beehive.offsetLeft) + (Math.random() * 200 - 100); 
+        const deltaY = (centerY - beehive.offsetTop) + (Math.random() * 200 - 100);
+
+        setTimeout(() => {
+            bee.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+            bee.style.opacity = '0';
+        }, 50);
+
+        // 7 saniye sonra arıyı kaldır
+        setTimeout(() => {
+            bee.remove();
+        }, 7000);
+    }
+});
+
+
+
+/*GRİNCH*/
+const trees = document.querySelectorAll('.tree');
+const popupImage = document.getElementById('popupImage');
+const popupSound = document.getElementById('popupSound');
+
+trees.forEach(tree => {
+    tree.addEventListener('click', () => {
+        // Resmi göster
+        popupImage.style.display = 'block';
+        // Ses çal
+        popupSound.currentTime = 0;
+        popupSound.play();
+        // 8 saniye sonra resmi gizle
+        setTimeout(() => {
+            popupImage.style.display = 'none';
+        }, 8000);
+    });
+});
+
+
 
 
 /*IŞIK*/
