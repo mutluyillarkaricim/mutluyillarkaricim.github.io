@@ -450,7 +450,24 @@ setInterval(() => {
 /*ARILAR*/
 const beehive = document.getElementById('beehive');
 
+/* 🎵 RASTGELE 2 ŞARKI */
+const beeSounds = [
+    new Audio('bal böceği1.mp3'),
+    new Audio('bal böceği2.mp3'),
+    new Audio('bal böceği3.mp3'),
+    new Audio('bal böceği4.mp3'),
+    new Audio('bal böceği5.mp3')
+];
+
+beeSounds.forEach(sound => sound.volume = 0.6);
+
 beehive.addEventListener('click', () => {
+
+    // Rastgele şarkı çal
+    const randomSound = beeSounds[Math.floor(Math.random() * beeSounds.length)];
+    randomSound.currentTime = 0;
+    randomSound.play();
+
     const beesCount = 40;
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
@@ -478,7 +495,6 @@ beehive.addEventListener('click', () => {
         }, 7000);
     }
 });
-
 
 
 /*GRİNCH*/
@@ -674,4 +690,5 @@ document.addEventListener("click",(e)=>{
 
 </body>
 </html>
+
 
