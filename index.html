@@ -447,6 +447,40 @@ setInterval(() => {
 
 
 
+/*NOEL BABA*/
+document.addEventListener("DOMContentLoaded", () => {
+    const santa = document.querySelector(".santa");
+    if (!santa) return;
+
+    let offsetX = 0;
+    let offsetY = 0;
+    const speed = 20;
+
+    document.addEventListener("keydown", (e) => {
+        switch (e.key) {
+            case "ArrowUp":
+                offsetY -= speed;
+                break;
+            case "ArrowDown":
+                offsetY += speed;
+                break;
+            case "ArrowLeft":
+                offsetX += speed;   // scaleX(-1) yüzünden ters
+                break;
+            case "ArrowRight":
+                offsetX -= speed;   // scaleX(-1) yüzünden ters
+                break;
+            default:
+                return;
+        }
+
+        // CSS'teki transform BOZULMAZ
+        santa.style.transform = `scaleX(-1) translate(${offsetX}px, ${offsetY}px)`;
+    });
+});
+
+
+
 /*ARILAR*/
 const beehive = document.getElementById('beehive');
 
@@ -690,5 +724,6 @@ document.addEventListener("click",(e)=>{
 
 </body>
 </html>
+
 
 
